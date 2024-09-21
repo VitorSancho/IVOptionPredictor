@@ -1,6 +1,7 @@
 
 import numpy as np
 from src.IVCalculator.IVMethods.BlackScholes import black_scholes, vega
+import math
 
 import warnings
 
@@ -13,7 +14,7 @@ def newton_raphson_for_volatility(S, K, T, r, market_price, options_type, initia
     sigma = initial_guess
     for i in range(max_iterations):
         price = black_scholes(S, K, T, r, sigma, options_type)
-        if price == -1:
+        if price == -1 or math.isnan(price):
             return price
         v = vega(S, K, T, r, sigma)
         price_difference = price - market_price
