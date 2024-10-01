@@ -1,0 +1,6 @@
+------só calls e desconto de 0.08, 0.09 e 0.1
+Melhor modelo e hiperparâmetros: {'model': RandomForestRegressor(), 'model__max_depth': None, 'model__min_samples_split': 5, 'model__n_estimators': 100}
+MSE no conjunto de teste: 0.00018713490120010476
+R² no conjunto de teste: 0.999145043644814
+
+----------calls e puts, desconto de 0.08, 0.09 e 0.1 e maturity de 0.2, 0.3 e 0.4
