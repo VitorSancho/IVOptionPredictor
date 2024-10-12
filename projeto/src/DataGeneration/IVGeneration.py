@@ -34,15 +34,22 @@ def calculate_volatility(row):
 
     return vol
 
-# Carregar o DataFrame do arquivo CSV
-df = pd.read_csv('D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\base_de_dados_4.csv')
+strikes = [5,10,15,20]
 
-# Paralelizar o cálculo da volatilidade
-volatility_list = Parallel(n_jobs=-1)(delayed(calculate_volatility)(row) for _, row in df.iterrows())
+for strike in strikes:
 
-# Adicionar a coluna de volatilidade ao DataFrame
-voldf = pd.DataFrame(volatility_list)
+    # Carregar o DataFrame do arquivo CSV
+    strike2 = strike + 5
+    path = f'D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\projeto\\data\\iniciais\\novos_premios\\strike_strike1astrike2'
+    path_ajustado = path.replace("strike1",str(strike))
+    path_ajustado = path_ajustado.replace("strike2",str(strike2))
+    df = pd.read_csv(path_ajustado + '\\strike_' + str(strike) + 'a' + str(strike2) + '.csv')
 
-# Salvar o DataFrame com a volatilidade no arquivo CSV
-output_path = 'D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\projeto\\data\\iniciais\\result_4.csv'
-voldf.to_csv(output_path, index=True)
+    # Paralelizar o cálculo da volatilidade
+    volatility_list = Parallel(n_jobs=-1)(delayed(calculate_volatility)(row) for _, row in df.iterrows())
+
+    # Adicionar a coluna de volatilidade ao DataFrame
+    voldf = pd.DataFrame(volatility_list)
+
+    # Salvar o DataFrame com a volatilidade no arquivo CSV
+    voldf.to_csv(path_ajustado + '\\result.csv', index=True)

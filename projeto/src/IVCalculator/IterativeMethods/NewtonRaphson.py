@@ -15,7 +15,7 @@ def newton_raphson_for_volatility(S, K, T, r, market_price, options_type, initia
     for i in range(max_iterations):
         price = black_scholes(S, K, T, r, sigma, options_type)
         if price == -1 or math.isnan(price):
-            return price
+            return -1
         v = vega(S, K, T, r, sigma)
         price_difference = price - market_price
         if abs(price_difference) < tolerance:

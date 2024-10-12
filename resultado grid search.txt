@@ -1,6 +1,96 @@
-------só calls e desconto de 0.08, 0.09 e 0.1
+------com scaller - só calls e desconto de 0.08, 0.09 e 0.1
 Melhor modelo e hiperparâmetros: {'model': RandomForestRegressor(), 'model__max_depth': None, 'model__min_samples_split': 5, 'model__n_estimators': 100}
 MSE no conjunto de teste: 0.00018713490120010476
 R² no conjunto de teste: 0.999145043644814
 
-----------calls e puts, desconto de 0.08, 0.09 e 0.1 e maturity de 0.2, 0.3 e 0.4
+----------com scaller - calls e puts, desconto de 0.08, 0.09 e 0.1 e maturity de 0.2, 0.3 e 0.4
+Melhor modelo e hiperparâmetros: {'model': RandomForestRegressor(), 'model__max_depth': None, 'model__min_samples_split': 5, 'model__n_estimators': 100}
+MSE no conjunto de teste: 0.0002564788697873948
+R² no conjunto de teste: 0.9990937358377502
+
+----- artigo 
+Hyperparameter General Grid
+max depth {8, 10, 12}
+max features {“sqrt”}
+n estimators {100, 200, 500}
+
+----- sgboot - calls e puts, spot entre 9,5 e 15,5, maturity de 0.2,0.3 e 0.4, e tx de desconte de 0.08,0.09 e 1
+Melhor modelo e hiperparâmetros: {'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__n_estimators': 100, 'model__subsample': 0.8}
+MSE no conjunto de teste: 0.0005828655999931901
+R² no conjunto de teste: 0.9979921296692095
+
+---- random forest grid search - sem sccaler - calls e puts, desconto de 0.08, 0.09 e 0.1 e maturity de 0.2, 0.3 e 0.4, spot entre 9.5 e 13 - novos dados com premios ajustados
+
+Melhor modelo e hiperparâmetros: {'model': RandomForestRegressor(), 'model__bootstrap': False, 'model__max_depth': None, 'model__max_features': 'sqrt', 'model__min_samples_leaf': 1, 'model__min_samples_split': 2, 'model__n_estimators': 100}
+MSE no conjunto de teste: 0.0008641948412203254
+R² no conjunto de teste: 0.9814083229367828
+
+---------- sxboost grid search - sem sccaler - calls e puts, desconto de 0.08, 0.09 e 0.1 e maturity de 0.2, 0.3 e 0.4, spot entre 9.5 e 13 - novos dados com premios ajustados
+PRIMEIRO GRID SEARCH:
+    # 'model__n_estimators': [50, 100],
+    # 'model__max_depth': [None, 10, 5],
+    # 'model__learning_rate': [0.01, 0.1],
+    # 'model__subsample': [0.8, 1.0]
+    # 'model__n_estimators': [100, 150, 200],
+    # 'model__max_depth': [10, 15],
+    # 'model__learning_rate': [0.1, 0.15],
+    # 'model__subsample': [0.7, 0.8],
+    # 'model__colsample_bytree': [0.6, 0.8, 1.0],
+    # 'model__gamma': [0, 0.1, 0.2],
+    # 'model__reg_alpha': [0, 0.1, 0.5],
+    # 'model__reg_lambda': [1, 1.5, 2],
+    # 'model__reg_lambda': [1, 1.5, 2],
+    'model__n_estimators': [200, 250, 300],
+    'model__max_depth': [15, 20, 25],
+    'model__learning_rate': [0.05, 0.1],
+    'model__subsample': [0.5, 0.6 ,0.7],
+    'model__colsample_bytree': [0.6, 0.8, 1.0],
+    'model__gamma': [0],
+    'model__reg_alpha': [0],
+    'model__reg_lambda': [2, 2.5, 3]
+PRIMEIRO RESULTADO:
+Melhor modelo e hiperparâmetros: {'model__colsample_bytree': 1.0, 'model__gamma': 0, 'model__learning_rate': 0.1, 'model__max_depth': 15, 'model__n_estimators': 200, 'model__reg_alpha': 0, 'model__reg_lambda': 2, 'model__subsample': 0.7}
+MSE no conjunto de teste: 0.00017890509634479231
+R² no conjunto de teste: 0.9961511621945008
+SEGUNDO GRID SEACH:
+Melhor modelo e hiperparâmetros: {'model__colsample_bytree': 1.0, 'model__gamma': 0, 'model__learning_rate': 0.1, 'model__max_depth': 15, 'model__n_estimators': 300, 'model__reg_alpha': 0, 'model__reg_lambda': 3, 'model__subsample': 0.5}
+MSE no conjunto de teste: 0.000153009491649866
+R² no conjunto de teste: 0.9967082619327554
+TERCEIRO GRID SEARCH - SEM SCALER
+Melhor modelo e hiperparâmetros: {'model__colsample_bytree': 1.0, 'model__gamma': 0, 'model__learning_rate': 0.1, 'model__max_depth': 15, 'model__n_estimators': 400, 'model__reg_alpha': 0, 'model__reg_lambda': 3.5, 'model__subsample': 0.5}
+MSE no conjunto de teste: 0.00013718509614269863
+R² no conjunto de teste: 0.9970486967941513
+
+
+
+
+------- TREINAMENTO BOOST
+MSE no conjunto de teste: 3.365166935563625e-05
+R² no conjunto de teste: 0.9992795593193936
+        colsample_bytree=1.0,
+        gamma=0,
+        learning_rate=0.1,
+        max_depth=15,
+        n_estimators=400,
+        reg_alpha=0,
+        reg_lambda=3.5,
+        subsample=0.5
+DADOS NOVOS SEM REMOÇÃO DE OUTLIERS -> SOMENTE REMOÇÃO DE NAN E -1s
+
+
+------- TREINAMENTO RANDOM FOREST
+MSE no conjunto de teste: 0.000273261377586264
+R² no conjunto de teste: 0.9941498113876266
+    max_depth=None,
+    min_samples_leaf=1,
+    max_features='sqrt',
+    min_samples_split=2, 
+    n_estimators=100,
+    random_state=42
+DADOS NOVOS SEM REMOÇÃO DE OUTLIERS -> SOMENTE REMOÇÃO DE NAN E -1s
+
+------- GRID SEARCH DO RANDOM COM AJUSTE STRIKE/SPOT
+Melhor modelo e hiperparâmetros: {'model': RandomForestRegressor(), 'model__bootstrap': True, 'model__max_depth': None, 'model__max_features': None, 'model__min_samples_leaf': 1, 'model__min_samples_split': 10, 'model__n_estimators': 400}
+MSE no conjunto de teste: 0.014397571012075724
+R² no conjunto de teste: 0.6902608324145204
+----------
