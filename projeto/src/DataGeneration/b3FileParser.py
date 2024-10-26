@@ -87,10 +87,12 @@ def salvar_em_csv(dados, nome_arqivo_csv):
         writer.writeheader()
         writer.writerows(dados)
 
-nome_arquivo_txt= "C:\\Users\\vitor\\Downloads\\COTAHIST_D04102024\\COTAHIST_D04102024.TXT"
+# nome_arquivo_txt= "C:\\Users\\vitor\\Downloads\\COTAHIST_D11102024\\COTAHIST_D11102024.TXT"
+nome_arquivo_txt= "C:\\Users\\vitor\\Downloads\\COTAHIST_D18102024\\COTAHIST_D18102024.TXT"
 dados = processar_arquivo(nome_arquivo_txt)
 
-nome_arquivo_csv = "D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\projeto\\data\\b3data.csv"
+# nome_arquivo_csv = "D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\projeto\\data\\b3data_2024.10.11.csv"
+nome_arquivo_csv = "D:\\CEDERJ\\2024.2\\tcc\\IVOptionPredictor\\projeto\\data\\b3data_2024.10.18.csv"
 salvar_em_csv(dados, nome_arquivo_csv)
 
 print("dados salvos")
